@@ -4,6 +4,13 @@ This repository contains code for the COCO-Facet benchmark for text-to-image ret
 
 The images are from COCO val2014 and val2017. 
 
+```bash
+git clone https://github.com/lst627/COCO-Facet.git
+cd COCO-Facet
+git submodule init
+git submodule update
+```
+
 ## Acknowledgment
 
-This code is based on the [VLM2Vec repository](https://github.com/username/VLM2Vec).
+This code is based on the [VLM2Vec repository](https://github.com/TIGER-AI-Lab/VLM2Vec).
