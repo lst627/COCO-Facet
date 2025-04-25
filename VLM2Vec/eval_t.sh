@@ -19,7 +19,7 @@ DATASET_PATH="/your-path"
 
 # python eval_t.py --model_name llava-hf/llava-1.5-7b-hf \
 #   --model_backbone llava-hf/llava-1.5-7b-hf \
-#   --encode_output_path output/outputs_t_detailed/ \
+#   --encode_output_path output/outputs_t/ \
 #   --num_crops 4 --max_len 256 \
 #   --pooling last --normalize True \
 #   --dataset_name TIGER-Lab/MMEB-eval \
@@ -32,7 +32,7 @@ DATASET_PATH="/your-path"
 
 python eval_t.py --model_name llava-hf/llava-1.5-7b-hf \
   --model_backbone llava-hf/llava-1.5-7b-hf \
-  --encode_output_path output/outputs_t_detailed/ \
+  --encode_output_path output/outputs_t/ \
   --num_crops 4 --max_len 256 \
   --pooling last --normalize True \
   --dataset_name TIGER-Lab/MMEB-eval \
@@ -56,7 +56,7 @@ python eval_t.py --model_name llava-hf/llava-1.5-7b-hf \
 
 # python eval_t.py --model_name llava-hf/llava-1.5-7b-hf \
 #   --model_backbone llava-hf/llava-1.5-7b-hf \
-#   --encode_output_path output/outputs_t_detailed/ \
+#   --encode_output_path output/outputs_t/ \
 #   --num_crops 4 --max_len 256 \
 #   --pooling last --normalize True \
 #   --dataset_name TIGER-Lab/MMEB-eval \
@@ -69,7 +69,7 @@ python eval_t.py --model_name llava-hf/llava-1.5-7b-hf \
 # Used for objects
 # python eval_t.py --model_name llava-hf/llava-1.5-7b-hf \
 #   --model_backbone llava-hf/llava-1.5-7b-hf \
-#   --encode_output_path output/outputs_t_detailed/ \
+#   --encode_output_path output/outputs_t/ \
 #   --num_crops 4 --max_len 256 \
 #   --pooling last --normalize True \
 #   --dataset_name TIGER-Lab/MMEB-eval \
@@ -82,7 +82,7 @@ python eval_t.py --model_name llava-hf/llava-1.5-7b-hf \
 # Used for gestures and material
 # python eval_t.py --model_name llava-hf/llava-1.5-7b-hf \
 #   --model_backbone llava-hf/llava-1.5-7b-hf \
-#   --encode_output_path output/outputs_t_detailed/ \
+#   --encode_output_path output/outputs_t/ \
 #   --num_crops 4 --max_len 256 \
 #   --pooling last --normalize True \
 #   --dataset_name TIGER-Lab/MMEB-eval \
@@ -95,7 +95,7 @@ python eval_t.py --model_name llava-hf/llava-1.5-7b-hf \
 
 # python eval_t.py --model_name llava-hf/llava-1.5-7b-hf \
 #   --model_backbone llava-hf/llava-1.5-7b-hf \
-#   --encode_output_path output/outputs_t_detailed/ \
+#   --encode_output_path output/outputs_t/ \
 #   --num_crops 4 --max_len 256 \
 #   --pooling last --normalize True \
 #   --dataset_name TIGER-Lab/MMEB-eval \
