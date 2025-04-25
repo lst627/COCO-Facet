@@ -31,6 +31,7 @@ vlm_image_tokens = {
     LLAVA_NEXT: "<image>",
     QWEN2_VL: "<|image_pad|>",
     QWEN2_5_VL: "<|image_pad|>",
+    'llava-hf/llava-1.5-7b-hf': "<image>",
 }
 
 backbone2model = {
@@ -91,6 +92,47 @@ def get_backbone_name(hf_config):
     assert hf_config.model_type in SUPPORTED_MODELS, f"Unknown backbone name {hf_config.model_type}.Supported models are {SUPPORTED_MODELS}"
     return MODEL2BACKBONE[hf_config.model_type]
 
+def Llava_process_fn(model_inputs: dict, processor, max_length=None):
+    input_ids, pixel_values, image_sizes, image_grid_thw = [], [], [], []
+    texts, images = model_inputs['text'], model_inputs['image']
+    image_exists = False
+    # 1. iterate each pair and process (since processors do not support batch processing)
+    for text, image in zip(texts, images):
+        if image is None:
+            inputs = processor(images=None, text=text, return_tensors="pt")
+            input_ids.append(inputs["input_ids"].squeeze(0).unsqueeze(1))
+            pixel_values.append(None)
+            image_sizes.append(None)
+        else:
+            image_exists = True
+            inputs = processor(images=image, text=text, return_tensors="pt")
+            input_ids.append(inputs["input_ids"].squeeze(0).unsqueeze(1))
+            pixel_values.append(inputs['pixel_values'])
+                
+
+    # 2. padding inputs
+    input_ids = torch._C._nn.pad_sequence(
+            input_ids, batch_first=True, padding_value=processor.tokenizer.pad_token_id
+        ).squeeze(2)
+    attention_mask = input_ids.ne(processor.tokenizer.pad_token_id)
+
+    inputs = {
+        'input_ids': input_ids,
+        'attention_mask': attention_mask,
+    }
+    # 3. special postcare for mixed batch (examples w/ and w/o images in the same batch)
+    if image_exists:
+        # dummy image inputs based on the first valid data point
+        pixel_value_shape_for_padding = list(v.shape for v in pixel_values if v is not None)[0]
+        # make the batch full tensors
+        pixel_values = [v if v is not None else torch.zeros(pixel_value_shape_for_padding) for v in pixel_values]
+        pixel_values = torch.cat(pixel_values, dim=0)
+        # add them to inputs
+        inputs['pixel_values'] = pixel_values
+    else:
+        inputs['pixel_values'] = torch.zeros(input_ids.shape[0], 1)
+
+    return inputs
 
 def Llava_NEXT_process_fn(model_inputs: dict, processor, max_length=None):
     input_ids, pixel_values, image_sizes, image_grid_thw = [], [], [], []
@@ -250,4 +292,5 @@ process_vlm_inputs_fns = {
     LLAVA_NEXT: Llava_NEXT_process_fn,
     QWEN2_VL: Qwen2_VL_process_fn,
     QWEN2_5_VL: Qwen2_VL_process_fn,
+    'llava-hf/llava-1.5-7b-hf': Llava_process_fn,
 }

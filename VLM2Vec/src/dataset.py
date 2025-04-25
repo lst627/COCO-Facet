@@ -123,6 +123,8 @@ class EvalDataset(Dataset):
 
     def __getitem__(self, item):
         text, img_path = self.paired_dataset[item]["text"], self.paired_dataset[item]["img_path"]
+        if self.model_args.model_backbone not in vlm_image_tokens:
+            return text, self._get_image(img_path),
         if self.backbone != PHI3V:
             text = text.replace(vlm_image_tokens[PHI3V], vlm_image_tokens[self.backbone])
 
@@ -142,11 +144,12 @@ class EvalDataset(Dataset):
             return None
         full_img_path = os.path.join(self.data_args.image_dir, img_path)
         image = Image.open(full_img_path)
-        if self.model_args.model_backbone != PHI3V and self.data_args.image_resolution:
+        if self.model_args.model_backbone not in vlm_image_tokens:
+            return image
+        elif self.model_args.model_backbone != PHI3V and self.data_args.image_resolution:
             return process_image(image, self.data_args.image_resolution)
         else:
             return image
-        return image
 
     def get_paired_data(self, text_field, img_path_field):
         """
@@ -167,6 +170,64 @@ class EvalDataset(Dataset):
                 assert type(row[img_path_field]) == list and len(row[img_path_field]) == len(row[text_field])
                 for text, img_path in zip(row[text_field], row[img_path_field]):
                     unique_pair.add((text, img_path))
+
+        paired_data = [{"text": text, "img_path": img_path} for text, img_path in unique_pair]
+        return paired_data
+
+class JsonDataset(EvalDataset):
+    def __init__(self, data_args, model_args, path, text_field, img_path_field, prompt=None):
+        """
+        (text_field, image_field) -> ("qry_text", "qry_img_path") or ("tgt_text", "tgt_img_path")
+        """
+        self.data_args = data_args
+        self.model_args = model_args
+        self.backbone = self.model_args.model_backbone
+
+        self.eval_data = load_dataset(
+            'json',
+            data_files=path,
+            split="train",
+        )
+        self.paired_data = self.get_paired_data(text_field, img_path_field, prompt)
+        self.paired_dataset = datasets.Dataset.from_dict({
+            "text": [pair["text"] for pair in self.paired_data],
+            "img_path": [pair["img_path"] for pair in self.paired_data]
+        })
+
+    def get_paired_data(self, text_field, img_path_field, prompt=None):
+        """
+        (text_field, image_field) -> ("qry_text", "qry_img_path") or ("tgt_text", "tgt_img_path")
+        """
+        unique_pair = set()
+        if prompt != None:
+            if isinstance(prompt, List[str]):
+                for row in self.eval_data:
+                    if isinstance(row[img_path_field], List[str]):
+                        for img_path in row[img_path_field]:
+                            for p in prompt:
+                                unique_pair.add((p, img_path))
+                    else:
+                        for p in prompt:
+                            unique_pair.add((p, row[img_path_field]))
+            else:
+                for row in self.eval_data:
+                    if isinstance(row[img_path_field], List[str]):
+                        for img_path in row[img_path_field]:
+                            unique_pair.add((prompt, img_path))
+                    else:
+                        unique_pair.add((prompt, row[img_path_field]))
+        else:
+            for row in self.eval_data:
+                if isinstance(row[text_field], str):
+                    if isinstance(row[img_path_field], List[str]):
+                        for img_path in row[img_path_field]:
+                            unique_pair.add((row[text_field], img_path))
+                    else:
+                        unique_pair.add((row[text_field], row[img_path_field]))
+                elif isinstance(row[text_field], List[str]):
+                    assert isinstance(row[img_path_field], List[str]) and len(row[img_path_field]) == len(row[text_field])
+                    for text, img_path in zip(row[text_field], row[img_path_field]):
+                        unique_pair.add((text, img_path))
 
         paired_data = [{"text": text, "img_path": img_path} for text, img_path in unique_pair]
         return paired_data

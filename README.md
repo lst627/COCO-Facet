@@ -7,8 +7,6 @@ The images are from COCO val2014 and val2017.
 ```bash
 git clone https://github.com/lst627/COCO-Facet.git
 cd COCO-Facet
-git submodule init
-git submodule update
 ```
 
 ## Acknowledgment

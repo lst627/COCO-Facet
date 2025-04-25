@@ -204,6 +204,18 @@ class TrainTextImageDataCollator:
         inputs = {'text': texts, 'image': images}
         return inputs
 
+@dataclass
+class QueryCollator:
+    # only for llm2clip and query
+    def __call__(self, examples):
+        """
+        :param examples: qry, qry_image, pos_text, pos_image
+        """
+        inputs = self._get_batch_inputs(examples)
+        return inputs
+
+    def _get_batch_inputs(self, examples):
+        return [text for (text, img) in examples]
 
 @dataclass
 class EvalCollator:
