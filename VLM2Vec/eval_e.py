@@ -69,6 +69,7 @@ def main():
         "Visual7W_scene_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What type of location is depicted in this image?\n',
         "mix_weather_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What is the weather like in this image?\n',
         "COCO_object_retrieval": f'<|image_1|>\nRepresent the given image with the following question: Which objects are present in this image?\n',
+        "COCO_animal_retrieval": f'<|image_1|>\nRepresent the given image with the following question: Which animals can be seen in this image?\n',
         "COCO_gesture_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What gesture are the people making in this image?\n',
         "COCOStuff_material_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What material are the objects in this image made of?\n'
     }

@@ -72,6 +72,7 @@ def main():
         "Visual7W_people_num_retrieval": f'USER: <image>\nHow many people are present in this image? ASSISTANT:',
         "mix_weather_retrieval": f'USER: <image>\nWhat is the weather like in this image? ASSISTANT:',
         "COCO_object_retrieval": f'USER: <image>\nWhich objects are present in this image? ASSISTANT:',
+        "COCO_animal_retrieval": f'USER: <image>\nWhich animals can be seen in this image? ASSISTANT:',
         "COCO_gesture_retrieval": f'USER: <image>\nWhat gesture are the people making in this image? ASSISTANT:',
         "COCOStuff_material_retrieval": f'USER: <image>\nWhat material are the objects in this image made of? ASSISTANT:'
     }
