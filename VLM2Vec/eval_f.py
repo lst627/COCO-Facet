@@ -46,20 +46,34 @@ def main():
     data_args: DataArguments
     training_args: TrainingArguments
     os.makedirs(data_args.encode_output_path, exist_ok=True)
-    prompt_dict = {
+    # prompt_dict = {
+    #     # "Original_COCO_retrieval": f'<|image_1|>\nRepresent the given image.\n', 
+    #     "SUN397_retrival": f'<|image_1|>\nRepresent the given image with the following question: What scene is in the image?\n', 
+    #     "Place365_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What scene is in the image?\n',
+    #     "Country211_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What country is the scene located in the image?\n',
+    #     "Visual7W_time_retrieval": f'<|image_1|>\nRepresent the given image with the following question: When is the image taken?\n',
+    #     "Visual7W_people_num_retrieval": f'<|image_1|>\nRepresent the given image with the following question: How many people are in the image?\n',
+    #     "Visual7W_scene_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What scene is in the image?\n',
+    #     "mix_weather_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What is the weather in the image?\n',
+    #     "COCO_object_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What objects are in the image?\n',
+    #     "COCO_gesture_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What is the person doing in the image?\n',
+    #     "COCOStuff_material_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What are the objects made of in the image?\n'
+    # }
+    # prompt = prompt_dict[data_args.subset_name[0]]
+    gpt_prompt_dict = {
         # "Original_COCO_retrieval": f'<|image_1|>\nRepresent the given image.\n', 
-        "SUN397_retrival": f'<|image_1|>\nRepresent the given image with the following question: What scene is in the image?\n', 
-        "Place365_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What scene is in the image?\n',
-        "Country211_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What country is the scene located in the image?\n',
-        "Visual7W_time_retrieval": f'<|image_1|>\nRepresent the given image with the following question: When is the image taken?\n',
-        "Visual7W_people_num_retrieval": f'<|image_1|>\nRepresent the given image with the following question: How many people are in the image?\n',
-        "Visual7W_scene_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What scene is in the image?\n',
-        "mix_weather_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What is the weather in the image?\n',
-        "COCO_object_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What objects are in the image?\n',
-        "COCO_gesture_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What is the person doing in the image?\n',
-        "COCOStuff_material_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What are the objects made of in the image?\n'
+        "SUN397_retrival": f'<|image_1|>\nRepresent the given image with the following question: What type of location is depicted in this image?\n', 
+        "Place365_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What type of location is depicted in this image?\n',
+        "Country211_retrieval": f'<|image_1|>\nRepresent the given image with the following question: Which country is shown in this image?\n',
+        "Visual7W_time_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What time of day is depicted in this image?\n',
+        "Visual7W_people_num_retrieval": f'<|image_1|>\nRepresent the given image with the following question: How many people are present in this image?\n',
+        "Visual7W_scene_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What type of location is depicted in this image?\n',
+        "mix_weather_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What is the weather like in this image?\n',
+        "COCO_object_retrieval": f'<|image_1|>\nRepresent the given image with the following question: Which objects are present in this image?\n',
+        "COCO_gesture_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What gesture are the people making in this image?\n',
+        "COCOStuff_material_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What material are the objects in this image made of?\n'
     }
-    prompt = prompt_dict[data_args.subset_name[0]]
+    prompt = gpt_prompt_dict[data_args.subset_name[0]]
 
     processor = AutoProcessor.from_pretrained(
         model_args.model_name,

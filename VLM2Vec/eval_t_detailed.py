@@ -48,20 +48,34 @@ def main():
     training_args: TrainingArguments
     os.makedirs(data_args.encode_output_path, exist_ok=True)
     
-    detailed_prompt_dict = {
+    # detailed_prompt_dict = {
+    #     "Original_COCO_retrieval": f'USER: <image>\nWhat is in the image? Please answer in detail. ASSISTANT:',
+    #     "SUN397_retrival": f'USER: <image>\nWhat scene is in the image? Please answer in detail. ASSISTANT:', 
+    #     "Place365_retrieval": f'USER: <image>\nWhat scene is in the image? Please answer in detail. ASSISTANT:',
+    #     "Country211_retrieval": f'USER: <image>\nWhat country is the scene located in the image? Please answer in detail. ASSISTANT:',
+    #     "Visual7W_time_retrieval": f'USER: <image>\nWhen is the image taken? Please answer in detail. ASSISTANT:',
+    #     "Visual7W_scene_retrieval": f'USER: <image>\nWhat scene is in the image? Please answer in detail. ASSISTANT:',
+    #     "Visual7W_people_num_retrieval": f'USER: <image>\nHow many people are in the image? Please answer in detail. ASSISTANT:',
+    #     "mix_weather_retrieval": f'USER: <image>\nWhat is the weather in the image? Please answer in detail. ASSISTANT:',
+    #     "COCO_object_retrieval": f'USER: <image>\nWhat objects are in the image? Please answer in detail. ASSISTANT:',
+    #     "COCO_gesture_retrieval": f'USER: <image>\nWhat is the person doing in the image? Please answer in detail. ASSISTANT:',
+    #     "COCOStuff_material_retrieval": f'USER: <image>\nWhat are the objects made of in the image? Please answer in detail. ASSISTANT:'
+    # }
+    # prompt = detailed_prompt_dict[data_args.subset_name[0]]
+    gpt_detailed_prompt_dict = {
         "Original_COCO_retrieval": f'USER: <image>\nWhat is in the image? Please answer in detail. ASSISTANT:',
-        "SUN397_retrival": f'USER: <image>\nWhat scene is in the image? Please answer in detail. ASSISTANT:', 
-        "Place365_retrieval": f'USER: <image>\nWhat scene is in the image? Please answer in detail. ASSISTANT:',
-        "Country211_retrieval": f'USER: <image>\nWhat country is the scene located in the image? Please answer in detail. ASSISTANT:',
-        "Visual7W_time_retrieval": f'USER: <image>\nWhen is the image taken? Please answer in detail. ASSISTANT:',
-        "Visual7W_scene_retrieval": f'USER: <image>\nWhat scene is in the image? Please answer in detail. ASSISTANT:',
-        "Visual7W_people_num_retrieval": f'USER: <image>\nHow many people are in the image? Please answer in detail. ASSISTANT:',
-        "mix_weather_retrieval": f'USER: <image>\nWhat is the weather in the image? Please answer in detail. ASSISTANT:',
-        "COCO_object_retrieval": f'USER: <image>\nWhat objects are in the image? Please answer in detail. ASSISTANT:',
-        "COCO_gesture_retrieval": f'USER: <image>\nWhat is the person doing in the image? Please answer in detail. ASSISTANT:',
-        "COCOStuff_material_retrieval": f'USER: <image>\nWhat are the objects made of in the image? Please answer in detail. ASSISTANT:'
+        "SUN397_retrival": f'USER: <image>\nWhat type of location is depicted in this image? Please answer in detail. ASSISTANT:', 
+        "Place365_retrieval": f'USER: <image>\nWhat type of location is depicted in this image? Please answer in detail. ASSISTANT:',
+        "Country211_retrieval": f'USER: <image>\nWhich country is shown in this image? Please answer in detail. ASSISTANT:',
+        "Visual7W_time_retrieval": f'USER: <image>\nWhat time of day is depicted in this image? Please answer in detail. ASSISTANT:',
+        "Visual7W_scene_retrieval": f'USER: <image>\nWhat type of location is depicted in this image? Please answer in detail. ASSISTANT:',
+        "Visual7W_people_num_retrieval": f'USER: <image>\nHow many people are present in this image? Please answer in detail. ASSISTANT:',
+        "mix_weather_retrieval": f'USER: <image>\nWhat is the weather like in this image? Please answer in detail. ASSISTANT:',
+        "COCO_object_retrieval": f'USER: <image>\nWhich objects are present in this image? Please answer in detail. ASSISTANT:',
+        "COCO_gesture_retrieval": f'USER: <image>\nWhat gesture are the people making in this image? Please answer in detail. ASSISTANT:',
+        "COCOStuff_material_retrieval": f'USER: <image>\nWhat material are the objects in this image made of? Please answer in detail. ASSISTANT:'
     }
-    prompt = detailed_prompt_dict[data_args.subset_name[0]]
+    prompt = gpt_detailed_prompt_dict[data_args.subset_name[0]]
 
     instruction = 'Find a caption that contains the given information'
     
