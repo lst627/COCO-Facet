@@ -395,6 +395,9 @@ class CLIPCollator:
         """
         inputs = self._get_batch_inputs(examples)
         return inputs
+    
+    def _process_text(self, text):
+        return self.txt_processors(text, padding=getattr(self.data_args, "padding", True), max_length=self.data_args.max_len, truncation=True, return_tensors="pt")
 
     def _get_batch_inputs(self, examples):
         input_ids, pixel_values, attention_mask = [], [], []
@@ -409,7 +412,7 @@ class CLIPCollator:
                 pixel_values.append(image_inputs['pixel_values'])
             if text:
                 text_exist = True
-            text_inputs = self.txt_processors(text, padding=getattr(self.data_args, "padding", True), max_length=self.data_args.max_len, truncation=True, return_tensors="pt")
+            text_inputs = self._process_text(text)
             input_ids.append(text_inputs["input_ids"].squeeze(0))
         if text_exist:
             input_ids = torch.nn.utils.rnn.pad_sequence(
@@ -427,6 +430,14 @@ class CLIPCollator:
         }
 
         return inputs
+
+class SigLIPCollator(CLIPCollator):
+    data_args: DataArguments
+    vis_processors: AutoProcessor
+    txt_processors: AutoTokenizer
+
+    def _process_text(self, text):
+        return self.txt_processors(text, padding="max_length", max_length=self.data_args.max_len, return_tensors="pt")
 
 
 @dataclass
