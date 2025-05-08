@@ -382,6 +382,105 @@ class DeprecatedEvalCollator:
 
         return inputs
 
+llama3_template = '<|start_header_id|>user<|end_header_id|>\n\n{}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n \n'
+img_prompt = llama3_template.format('<image>\nSummary above image in one word')
+text_prompt = llama3_template.format('<sent>\nSummary above sentence in one word: ')
+
+@dataclass
+class E5VCollator(DeprecatedEvalCollator):
+    data_args: DataArguments
+    model_args: ModelArguments
+    processor: ProcessorMixin
+    extra_prompt: str
+    
+    def _get_batch_inputs(self, examples):
+        if examples[0][1] == None: # No images
+            inputs = self.processor([text_prompt.replace('<sent>', example[0]) for example in examples], return_tensors="pt", padding=True).to('cuda')
+        else:
+            inputs = self.processor([img_prompt+self.extra_prompt]*len(examples), [example[1] for example in examples], return_tensors="pt", padding=True)
+
+        return inputs
+
+
+@dataclass
+class MMEmbedCollator:
+    data_args: DataArguments
+    model_args: ModelArguments
+    extra_prompt: str
+
+    def __call__(self, examples):
+        """
+        :param examples: qry, qry_image, pos_text, pos_image
+        """
+        inputs = self._get_batch_inputs(examples)
+        return inputs
+    
+    def _get_batch_inputs(self, examples):
+        if examples[0][1] == None: # No images, only queries
+            inputs = [{'txt': example[0]} for example in examples]
+        else:
+            if self.extra_prompt != "":
+                inputs = [{'txt': self.extra_prompt, 'img': img} for _, img in examples]
+            else:
+                inputs = [{'txt': txt.replace("<|image_1|>\n", "").replace("\n", ""), 'img': img} for txt, img in examples]
+
+        return inputs
+    
+task_instruction = "Find me an image that matches the given caption."
+@dataclass
+class MMRetCollator(EvalCollator):
+    data_args: DataArguments
+    model_args: ModelArguments
+    processor: ProcessorMixin
+    extra_prompt: str
+
+    def prepare_text_input(self, image=None, text=None, q_or_c=None, task_instruction=None):
+        task_instruction_example_cir = "Retrieve the target image that best meets the combined criteria by using both the provided image and the image retrieval instructions: "
+        
+        assert q_or_c in ["query", "candidate", "q", "c"]
+        
+        if "q" in q_or_c:
+            if task_instruction is None:
+                text_input = "[INST] \n <instruct>  <query>"
+                print(f"""
+                        Warning: For optimal performance, MMRet-MLLM requires the task instruction to be specified in the query.
+                        For example, for the composed image retrieval task, you might use a specific instruction like: {task_instruction_example_cir}.
+                        Instructions for other tasks can be referenced in the MMEB benchmark.
+                    """)
+            elif task_instruction is not None:
+                text_input = f"[INST] \n <instruct> {task_instruction} <query> "
+            
+            if text is not None:
+                text_input = f"{text_input} {text} \n"
+            if image is not None:
+                text_input = f"{text_input} <image>"
+
+            text_input = f"{text_input} [/INST]"
+        else:
+            text_input = "[INST] "
+            if text is not None:
+                text_input = f"{text_input} {text} \n"
+            if image is not None:
+                text_input = f"{text_input} <image>"
+            text_input = f"{text_input} [/INST]"
+        
+        return text_input
+
+    def _get_batch_inputs(self, examples):
+        if examples[0][1] == None: # No images
+            text_input = [self.prepare_text_input(None, example[0], "q", task_instruction) for example in examples]
+            inputs = self.processor(text=text_input, return_tensors="pt", padding=True)
+            
+        else:
+            if self.extra_prompt != "":
+                text_input = [self.prepare_text_input(_image, self.extra_prompt, "c", task_instruction) for _, _image in examples]
+            else:
+                text_input = [self.prepare_text_input(_image, _text, "c", task_instruction) for _text, _image in examples]
+            images = [Image.open(_image).resize((512,512)).convert("RGB") for _, _image in examples]
+            inputs = self.processor(images=images, text=text_input, return_tensors="pt", padding=True)
+
+        return inputs
+
 
 @dataclass
 class CLIPCollator:
@@ -437,7 +536,7 @@ class SigLIPCollator(CLIPCollator):
     txt_processors: AutoTokenizer
 
     def _process_text(self, text):
-        return self.txt_processors(text, padding="max_length", max_length=self.data_args.max_len, return_tensors="pt")
+        return self.txt_processors(text, padding="max_length", max_length=self.data_args.max_len, truncation=True, return_tensors="pt")
 
 
 @dataclass
