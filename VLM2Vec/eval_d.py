@@ -18,7 +18,7 @@ from evaluation.eval_utils import get_pred, save_results, print_results
 
 t2i_tasks = [
     "CIRR", "NIGHTS", "EDIS", "MSCOCO_t2i","VisDial","VisualNews_t2i","WebQA", "Wiki-SS-NQ", "OVEN", # retrieval
-    "RefCOCO_retrieval", "Place365_retrieval", "SUN397_retrival", "Country211_retrieval"]
+    "RefCOCO_retrieval", "Place365_retrieval", "SUN397_retrieval", "Country211_retrieval"]
 i2t_tasks = [
     "MSCOCO_i2t","VisualNews_i2t", # retrieval
     "ImageNet-1K", "N24News", "HatefulMemes", "VOC2007", "SUN397", "Place365", "ImageNet-A", "ImageNet-R", "ObjectNet", "Country211" # classification

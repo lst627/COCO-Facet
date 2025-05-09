@@ -18,7 +18,7 @@ from gritlm import GritLM
 
 t2i_tasks = [
     "CIRR", "NIGHTS", "EDIS", "MSCOCO_t2i","VisDial","VisualNews_t2i","WebQA", "Wiki-SS-NQ", "OVEN", # retrieval
-    "RefCOCO_retrieval", "Place365_retrieval", "SUN397_retrival", "Country211_retrieval", "COCO_object_retrieval", "COCO_gesture_retrieval"]
+    "RefCOCO_retrieval", "Place365_retrieval", "SUN397_retrieval", "Country211_retrieval", "COCO_object_retrieval", "COCO_gesture_retrieval"]
 i2t_tasks = [
     "MSCOCO_i2t","VisualNews_i2t", # retrieval
     "ImageNet-1K", "N24News", "HatefulMemes", "VOC2007", "SUN397", "Place365", "ImageNet-A", "ImageNet-R", "ObjectNet", "Country211" # classification
@@ -50,7 +50,7 @@ def main():
     
     # prompt_dict = {
     #     "Original_COCO_retrieval": f'USER: <image>\nWhat is in the image? ASSISTANT:',
-    #     "SUN397_retrival": f'USER: <image>\nWhat scene is in the image? ASSISTANT:', 
+    #     "SUN397_retrieval": f'USER: <image>\nWhat scene is in the image? ASSISTANT:', 
     #     "Place365_retrieval": f'USER: <image>\nWhat scene is in the image? ASSISTANT:',
     #     "Country211_retrieval": f'USER: <image>\nWhat country is the scene located in the image? ASSISTANT:',
     #     "Visual7W_time_retrieval": f'USER: <image>\nWhen is the image taken? ASSISTANT:',
@@ -64,7 +64,7 @@ def main():
     # prompt = prompt_dict[data_args.subset_name[0]]
     gpt_prompt_dict = {
         "Original_COCO_retrieval": f'USER: <image>\nWhat is in the image? ASSISTANT:',
-        "SUN397_retrival": f'USER: <image>\nWhat type of location is depicted in this image? ASSISTANT:', 
+        "SUN397_retrieval": f'USER: <image>\nWhat type of location is depicted in this image? ASSISTANT:', 
         "Place365_retrieval": f'USER: <image>\nWhat type of location is depicted in this image? ASSISTANT:',
         "Country211_retrieval": f'USER: <image>\nWhich country is shown in this image? ASSISTANT:',
         "Visual7W_time_retrieval": f'USER: <image>\nWhat time of day is depicted in this image? ASSISTANT:',

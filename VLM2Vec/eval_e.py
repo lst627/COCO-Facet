@@ -18,7 +18,7 @@ from evaluation.eval_utils import get_pred, save_results, print_results
 
 t2i_tasks = [
     "CIRR", "NIGHTS", "EDIS", "MSCOCO_t2i","VisDial","VisualNews_t2i","WebQA", "Wiki-SS-NQ", "OVEN", # retrieval
-    "RefCOCO_retrieval", "Place365_retrieval", "SUN397_retrival", "Country211_retrieval"]
+    "RefCOCO_retrieval", "Place365_retrieval", "SUN397_retrieval", "Country211_retrieval"]
 i2t_tasks = [
     "MSCOCO_i2t","VisualNews_i2t", # retrieval
     "ImageNet-1K", "N24News", "HatefulMemes", "VOC2007", "SUN397", "Place365", "ImageNet-A", "ImageNet-R", "ObjectNet", "Country211" # classification
@@ -48,7 +48,7 @@ def main():
     os.makedirs(data_args.encode_output_path, exist_ok=True)
     # prompt_dict = {
     #     "Original_COCO_retrieval": f'<|image_1|>\nRepresent the given image.\n', 
-    #     "SUN397_retrival": f'<|image_1|>\nRepresent the given image with the following question: What scene is in the image?\n', 
+    #     "SUN397_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What scene is in the image?\n', 
     #     "Place365_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What scene is in the image?\n',
     #     "Country211_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What country is the scene located in the image?\n',
     #     "Visual7W_time_retrieval": f'<|image_1|>\nRepresent the given image with the following question: When is the image taken?\n',
@@ -61,7 +61,7 @@ def main():
     # }
     gpt_prompt_dict = {
         "Original_COCO_retrieval": f'<|image_1|>\nRepresent the given image.\n', 
-        "SUN397_retrival": f'<|image_1|>\nRepresent the given image with the following question: What type of location is depicted in this image?\n', 
+        "SUN397_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What type of location is depicted in this image?\n', 
         "Place365_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What type of location is depicted in this image?\n',
         "Country211_retrieval": f'<|image_1|>\nRepresent the given image with the following question: Which country is shown in this image?\n',
         "Visual7W_time_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What time of day is depicted in this image?\n',
