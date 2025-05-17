@@ -1,0 +1,9 @@
+{
+    "Find me an everyday image that is taken during the daytime.\n": "<|image_1|>\nRepresent the given image with the following question: What time of day is depicted in this image?\n",
+    "Find me an everyday image that is taken during the night.\n": "<|image_1|>\nRepresent the given image with the following question: What time of day is depicted in this image?\n",
+    "Find me an everyday image that is taken during the evening.\n": "<|image_1|>\nRepresent the given image with the following question: What time of day is depicted in this image?\n",
+    "Find me an everyday image that is taken during the afternoon.\n": "<|image_1|>\nRepresent the given image with the following question: What time of day is depicted in this image?\n",
+    "Find me an everyday image that is taken during the dusk.\n": "<|image_1|>\nRepresent the given image with the following question: What time of day is depicted in this image?\n",
+    "Find me an everyday image that is taken during the morning.\n": "<|image_1|>\nRepresent the given image with the following question: What time of day is depicted in this image?\n",
+    "Find me an everyday image that is taken during the sunrise.\n": "<|image_1|>\nRepresent the given image with the following question: What time of day is depicted in this image?\n"
+}

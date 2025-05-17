@@ -26,15 +26,15 @@ DATASET_PATH="/your-path"
 #   --image_dir $DATASET_PATH/visual7w/images/
 
 
-python eval_e.py --model_name TIGER-Lab/VLM2Vec-Full \
-  --model_backbone phi3_v \
-  --encode_output_path output/outputs_e/ \
-  --num_crops 4 --max_len 256 \
-  --pooling last --normalize True \
-  --dataset_name TIGER-Lab/MMEB-eval \
-  --subset_name Visual7W_scene_retrieval \
-  --dataset_split test --per_device_eval_batch_size 64 \
-  --image_dir $DATASET_PATH/visual7w/images/
+# python eval_e.py --model_name TIGER-Lab/VLM2Vec-Full \
+#   --model_backbone phi3_v \
+#   --encode_output_path output/outputs_e/ \
+#   --num_crops 4 --max_len 256 \
+#   --pooling last --normalize True \
+#   --dataset_name TIGER-Lab/MMEB-eval \
+#   --subset_name Visual7W_scene_retrieval \
+#   --dataset_split test --per_device_eval_batch_size 64 \
+#   --image_dir $DATASET_PATH/visual7w/images/
 
 # python eval_e.py --model_name TIGER-Lab/VLM2Vec-Full \
 #   --model_backbone phi3_v \

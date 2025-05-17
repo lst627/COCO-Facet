@@ -3,9 +3,9 @@ export HF_HOME="/your-path/hf_cache/"
 DATASET_PATH="/your-path"
 
 # Used for Original COCO
-# python eval_f.py --model_name TIGER-Lab/VLM2Vec-Full \
+# python eval_a_la.py --model_name TIGER-Lab/VLM2Vec-Full \
 #   --model_backbone phi3_v \
-#   --encode_output_path output/outputs_f/ \
+#   --encode_output_path output/outputs_a \
 #   --num_crops 4 --max_len 256 \
 #   --pooling last --normalize True \
 #   --dataset_name TIGER-Lab/MMEB-eval \
@@ -13,11 +13,10 @@ DATASET_PATH="/your-path"
 #   --dataset_split test --per_device_eval_batch_size 64 \
 #   --image_dir $DATASET_PATH/
 
-# Used for time and scene and weather
-
-# python eval_f.py --model_name TIGER-Lab/VLM2Vec-Full \
+# # Used for time and scene and weather
+# python eval_a_la.py --model_name TIGER-Lab/VLM2Vec-Full \
 #   --model_backbone phi3_v \
-#   --encode_output_path output/outputs_f/ \
+#   --encode_output_path output/outputs_a \
 #   --num_crops 4 --max_len 256 \
 #   --pooling last --normalize True \
 #   --dataset_name TIGER-Lab/MMEB-eval \
@@ -25,10 +24,9 @@ DATASET_PATH="/your-path"
 #   --dataset_split test --per_device_eval_batch_size 64 \
 #   --image_dir $DATASET_PATH/visual7w/images/
 
-
-# python eval_f.py --model_name TIGER-Lab/VLM2Vec-Full \
+# python eval_a_la.py --model_name TIGER-Lab/VLM2Vec-Full \
 #   --model_backbone phi3_v \
-#   --encode_output_path output/outputs_f/ \
+#   --encode_output_path output/outputs_a \
 #   --num_crops 4 --max_len 256 \
 #   --pooling last --normalize True \
 #   --dataset_name TIGER-Lab/MMEB-eval \
@@ -36,9 +34,9 @@ DATASET_PATH="/your-path"
 #   --dataset_split test --per_device_eval_batch_size 64 \
 #   --image_dir $DATASET_PATH/visual7w/images/
 
-# python eval_f.py --model_name TIGER-Lab/VLM2Vec-Full \
+# python eval_a_la.py --model_name TIGER-Lab/VLM2Vec-Full \
 #   --model_backbone phi3_v \
-#   --encode_output_path output/outputs_f/ \
+#   --encode_output_path output/outputs_a \
 #   --num_crops 4 --max_len 256 \
 #   --pooling last --normalize True \
 #   --dataset_name TIGER-Lab/MMEB-eval \
@@ -46,9 +44,9 @@ DATASET_PATH="/your-path"
 #   --dataset_split test --per_device_eval_batch_size 64 \
 #   --image_dir $DATASET_PATH/visual7w/images/
 
-# python eval_f.py --model_name TIGER-Lab/VLM2Vec-Full \
+# python eval_a_la.py --model_name TIGER-Lab/VLM2Vec-Full \
 #   --model_backbone phi3_v \
-#   --encode_output_path output/outputs_f/ \
+#   --encode_output_path output/outputs_a \
 #   --num_crops 4 --max_len 256 \
 #   --pooling last --normalize True \
 #   --dataset_name TIGER-Lab/MMEB-eval \
@@ -56,10 +54,10 @@ DATASET_PATH="/your-path"
 #   --dataset_split test --per_device_eval_batch_size 64 \
 #   --image_dir $DATASET_PATH/
 
-# Used for objects
-# python eval_f.py --model_name TIGER-Lab/VLM2Vec-Full \
+# # # Used for objects
+# python eval_a_la.py --model_name TIGER-Lab/VLM2Vec-Full \
 #   --model_backbone phi3_v \
-#   --encode_output_path output/outputs_f/ \
+#   --encode_output_path output/outputs_a \
 #   --num_crops 4 --max_len 256 \
 #   --pooling last --normalize True \
 #   --dataset_name TIGER-Lab/MMEB-eval \
@@ -67,9 +65,9 @@ DATASET_PATH="/your-path"
 #   --dataset_split test --per_device_eval_batch_size 64 \
 #   --image_dir $DATASET_PATH/
 
-# python eval_f.py --model_name TIGER-Lab/VLM2Vec-Full \
+# python eval_a_la.py --model_name TIGER-Lab/VLM2Vec-Full \
 #   --model_backbone phi3_v \
-#   --encode_output_path output/outputs_f/ \
+#   --encode_output_path output/outputs_a \
 #   --num_crops 4 --max_len 256 \
 #   --pooling last --normalize True \
 #   --dataset_name TIGER-Lab/MMEB-eval \
@@ -77,23 +75,27 @@ DATASET_PATH="/your-path"
 #   --dataset_split test --per_device_eval_batch_size 64 \
 #   --image_dir $DATASET_PATH/
 
-# Used for gestures
-# python eval_f.py --model_name TIGER-Lab/VLM2Vec-Full \
+# # # Used for gestures and material
+# python eval_a_la.py --model_name TIGER-Lab/VLM2Vec-Full \
 #   --model_backbone phi3_v \
-#   --encode_output_path output/outputs_f/ \
+#   --encode_output_path output/outputs_a \
 #   --num_crops 4 --max_len 256 \
 #   --pooling last --normalize True \
 #   --dataset_name TIGER-Lab/MMEB-eval \
 #   --subset_name COCO_gesture_retrieval \
 #   --dataset_split test --per_device_eval_batch_size 64 \
-#   --image_dir $DATASET_PATH/val2017
+#   --image_dir $DATASET_PATH/val2017/
 
-# python eval_f.py --model_name TIGER-Lab/VLM2Vec-Full \
+# python eval_a_la.py --model_name TIGER-Lab/VLM2Vec-Full \
 #   --model_backbone phi3_v \
-#   --encode_output_path output/outputs_f/ \
+#   --encode_output_path output/outputs_a \
 #   --num_crops 4 --max_len 256 \
 #   --pooling last --normalize True \
 #   --dataset_name TIGER-Lab/MMEB-eval \
 #   --subset_name COCOStuff_material_retrieval \
 #   --dataset_split test --per_device_eval_batch_size 64 \
-#   --image_dir $DATASET_PATH/val2017
+#   --image_dir $DATASET_PATH/val2017/
+
+
+
+

@@ -156,7 +156,7 @@ def main():
             data_files="../benchmark/"+subset+".json",
             split="train",
         )
-        acc = 0
+        acc_1, acc_5 = 0, 0
         all_pred = []
         total = 0
         for row in eval_data:
@@ -170,21 +170,21 @@ def main():
                 tgt_t = np.stack(tgt_t, axis=0)  # (num_candidate, dim)
             except:
                 import ipdb; ipdb.set_trace()
-            scores, pred = get_pred(qry_t, tgt_t, normalization=model_args.normalize)
-            if isinstance(pred, list):
-                if 0 in pred:
-                    acc += 1
-            else:
-                if pred == 0:
-                    acc += 1
-            all_pred.append(all_candidates[pred])
+            scores, pred_1 = get_pred(qry_t, tgt_t, normalization=model_args.normalize)
+            if pred_1 == 0:
+                acc_1 += 1
+            scores, pred_5 = get_pred(qry_t, tgt_t, normalization=model_args.normalize, top_k=5)
+            if 0 in pred_5:
+                acc_5 += 1
+            all_pred.append(all_candidates[pred_1])
 
         with open(os.path.join(data_args.encode_output_path, f"{subset}_pred.txt"), "w") as f:
             for item in all_pred:
                 f.write(f"{item}\n")
-        accuracy = acc / total * 100
+        accuracy = acc_1 / total * 100
         results[subset] = accuracy
-        print(f"\033[91m{subset} accuracy: {acc/total}\033[0m")
+        print(f"\033[91m{subset} accuracy (top 1): {acc_1/total}\033[0m")
+        print(f"\033[91m{subset} accuracy (top 5): {acc_5/total}\033[0m")
     save_results(results, model_args, data_args, training_args)
     print_results(results)
 

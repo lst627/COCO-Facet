@@ -1,0 +1,12 @@
+{
+    "Find me an image that contains any bird.\n": "<|image_1|>\nRepresent the given image with the following question: Which animals can be seen in this image?\n",
+    "Find me an image that contains any cat.\n": "<|image_1|>\nRepresent the given image with the following question: Which animals can be seen in this image?\n",
+    "Find me an image that contains any dog.\n": "<|image_1|>\nRepresent the given image with the following question: Which animals can be seen in this image?\n",
+    "Find me an image that contains any horse.\n": "<|image_1|>\nRepresent the given image with the following question: Which animals can be seen in this image?\n",
+    "Find me an image that contains any sheep.\n": "<|image_1|>\nRepresent the given image with the following question: Which animals can be seen in this image?\n",
+    "Find me an image that contains any cow.\n": "<|image_1|>\nRepresent the given image with the following question: Which animals can be seen in this image?\n",
+    "Find me an image that contains any elephant.\n": "<|image_1|>\nRepresent the given image with the following question: Which animals can be seen in this image?\n",
+    "Find me an image that contains any bear.\n": "<|image_1|>\nRepresent the given image with the following question: Which animals can be seen in this image?\n",
+    "Find me an image that contains any zebra.\n": "<|image_1|>\nRepresent the given image with the following question: Which animals can be seen in this image?\n",
+    "Find me an image that contains any giraffe.\n": "<|image_1|>\nRepresent the given image with the following question: Which animals can be seen in this image?\n"
+}

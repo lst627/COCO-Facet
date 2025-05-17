@@ -1,0 +1,10 @@
+{
+    "Find me an everyday image that contains someone jumping.": "<|image_1|>\nRepresent the given image with the following question: What gesture are the people making in this image?\n",
+    "Find me an everyday image that contains someone bending.": "<|image_1|>\nRepresent the given image with the following question: What gesture are the people making in this image?\n",
+    "Find me an everyday image that contains someone kneeling.": "<|image_1|>\nRepresent the given image with the following question: What gesture are the people making in this image?\n",
+    "Find me an everyday image that contains someone crawling.": "<|image_1|>\nRepresent the given image with the following question: What gesture are the people making in this image?\n",
+    "Find me an everyday image that contains someone squating.": "<|image_1|>\nRepresent the given image with the following question: What gesture are the people making in this image?\n",
+    "Find me an everyday image that contains someone lying.": "<|image_1|>\nRepresent the given image with the following question: How many people are present in this image?\n",
+    "Find me an everyday image that contains someone sitting.": "<|image_1|>\nRepresent the given image with the following question: How many people are present in this image?\n",
+    "Find me an everyday image that contains someone standing.": "<|image_1|>\nRepresent the given image with the following question: How many people are present in this image?\n"
+}

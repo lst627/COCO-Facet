@@ -158,7 +158,7 @@ def main():
             data_files="../benchmark/"+subset+".json",
             split="train",
         )
-        n_correct = 0
+        n_correct_1, n_correct_5 = 0, 0
         all_pred = []
         total = 0
         for row in eval_data:
@@ -170,24 +170,24 @@ def main():
                 tgt_t.append(tgt_dict[(tgt_text, tt)])
                 all_candidates.append((tgt_text, tt))
             tgt_t = np.stack(tgt_t, axis=0)  # (num_candidate, dim)
-            scores, pred = get_pred(qry_t, tgt_t, normalization=model_args.normalize)
-            if isinstance(pred, list):
-                if 0 in pred:
-                    n_correct += 1
-            else:
-                if pred == 0:
-                    n_correct += 1
+            scores, pred_1 = get_pred(qry_t, tgt_t, normalization=model_args.normalize)
+            if pred_1 == 0:
+                n_correct_1 += 1
+            scores, pred_5 = get_pred(qry_t, tgt_t, normalization=model_args.normalize, top_k=5)
+            if 0 in pred_5:
+                n_correct_5 += 1
             
-            all_pred.append(all_candidates[pred])
+            all_pred.append(all_candidates[pred_1])
         with open(os.path.join(data_args.encode_output_path, f"{subset}_pred.txt"), "w") as f:
             for item in all_pred:
                 f.write(f"{item}\n")
         score_path = os.path.join(data_args.encode_output_path, f"{subset}_score.json")
         print(f"Outputting final score to: {score_path}")
         with open(score_path, "w") as f:
-            score_dict = {"acc": n_correct/total, "num_correct": n_correct, "num_pred": total}
+            score_dict = {"top1 acc": n_correct_1/total, "top5 acc": n_correct_5/total, "num_correct_top_1": n_correct_1, "num_pred": total}
             json.dump(score_dict, f, indent=4)
-        print(f"\033[91m{subset} accuracy: {n_correct/total}\033[0m")
+        print(f"\033[91m{subset} accuracy (top 1):  {n_correct_1/total}\033[0m")
+        print(f"\033[91m{subset} accuracy (top 5):  {n_correct_5/total}\033[0m")
 
 
 if __name__ == "__main__":

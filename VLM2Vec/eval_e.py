@@ -15,6 +15,7 @@ import pickle
 import os
 from datasets import load_dataset
 from evaluation.eval_utils import get_pred, save_results, print_results
+from gpt_choose_prompt import gpt_choose_answer_for_text
 
 t2i_tasks = [
     "CIRR", "NIGHTS", "EDIS", "MSCOCO_t2i","VisDial","VisualNews_t2i","WebQA", "Wiki-SS-NQ", "OVEN", # retrieval
@@ -55,6 +56,7 @@ def main():
     #     "Visual7W_people_num_retrieval": f'<|image_1|>\nRepresent the given image with the following question: How many people are in the image?\n',
     #     "Visual7W_scene_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What scene is in the image?\n',
     #     "mix_weather_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What is the weather in the image?\n',
+    #     "COCO_animal_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What animals are in this image?\n',
     #     "COCO_object_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What objects are in the image?\n',
     #     "COCO_gesture_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What is the person doing in the image?\n',
     #     "COCOStuff_material_retrieval": f'<|image_1|>\nRepresent the given image with the following question: What are the objects made of in the image?\n'
@@ -167,6 +169,14 @@ def main():
     for subset in tqdm(data_args.subset_name, desc="calculate score"):
         encode_qry_path = os.path.join(data_args.encode_output_path, f"{subset}_qry")
         encode_tgt_path = os.path.join(data_args.encode_output_path, f"{subset}_tgt")
+
+        if os.path.exists(os.path.join(data_args.encode_output_path, f"{subset}_prompt.json")):
+            print("Found existing prompt file")
+            with open(os.path.join(data_args.encode_output_path, f"{subset}_prompt.json"), "r") as f:
+                selected_prompt_dict = json.load(f)
+        else:
+            selected_prompt_dict = {}
+
         with open(encode_qry_path, 'rb') as f:
             qry_tensor, qry_index = pickle.load(f)
         with open(encode_tgt_path, 'rb') as f:
@@ -184,35 +194,40 @@ def main():
             data_files="../benchmark/"+subset+".json",
             split="train",
         )
-        n_correct = 0
+        n_correct_1, n_correct_5 = 0, 0
         all_pred = []
         total = 0
         for row in eval_data:
             total += 1
             qry_t = qry_dict[(row["qry_text"], '')]  # (dim,)
             tgt_t, all_candidates = [], []
-            for tt in row["tgt_img_path"]:
-                for p in prompts:
-                    tgt_t.append(tgt_dict[(p, tt)])
-                    all_candidates.append((p, tt))
-            tgt_t = np.stack(tgt_t, axis=0)  # (num_candidate, dim)
-            scores, pred = get_pred(qry_t, tgt_t, normalization=model_args.normalize)
-            if isinstance(pred, list):
-                if any(p in pred for p in range(len(prompts))):
-                    n_correct += 1
+            
+            if row["qry_text"] in selected_prompt_dict:
+                p = selected_prompt_dict[row["qry_text"]]
             else:
-                if pred in [i for i in range(len(prompts))]:
-                    n_correct += 1
-            all_pred.append(all_candidates[pred])
+                p = gpt_choose_answer_for_text(row["qry_text"])
+                selected_prompt_dict[row["qry_text"]] = p
+            for tt in row["tgt_img_path"]:
+                tgt_t.append(tgt_dict[(p, tt)])
+                all_candidates.append((p, tt))
+            tgt_t = np.stack(tgt_t, axis=0)  # (num_candidate, dim)
+            scores, pred_1 = get_pred(qry_t, tgt_t, normalization=model_args.normalize)
+            if pred_1 == 0:
+                n_correct_1 += 1
+            scores, pred_5 = get_pred(qry_t, tgt_t, normalization=model_args.normalize, top_k=5)
+            if 0 in pred_5:
+                n_correct_5 += 1
+            all_pred.append(all_candidates[pred_1])
         with open(os.path.join(data_args.encode_output_path, f"{subset}_pred.txt"), "w") as f:
             for item in all_pred:
                 f.write(f"{item}\n")
         score_path = os.path.join(data_args.encode_output_path, f"{subset}_score.json")
         print(f"Outputting final score to: {score_path}")
         with open(score_path, "w") as f:
-            score_dict = {"acc": n_correct/total, "num_correct": n_correct, "num_pred": total}
+            score_dict = {"top1 acc": n_correct_1/total, "top5 acc": n_correct_5/total, "num_correct_top_1": n_correct_1, "num_pred": total}
             json.dump(score_dict, f, indent=4)
-        print(f"\033[91m{subset} accuracy: {n_correct/total}\033[0m")
+        print(f"\033[91m{subset} accuracy (top 1):  {n_correct_1/total}\033[0m")
+        print(f"\033[91m{subset} accuracy (top 5):  {n_correct_5/total}\033[0m")
 
 
 if __name__ == "__main__":

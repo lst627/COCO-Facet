@@ -1,0 +1,7 @@
+{
+    "Find me an everyday image showing some object or surface made of wood.": "<|image_1|>\nRepresent the given image with the following question: What material are the objects in this image made of?\n",
+    "Find me an everyday image showing some object or surface made of stone.": "<|image_1|>\nRepresent the given image with the following question: What material are the objects in this image made of?\n",
+    "Find me an everyday image showing some object or surface made of metal.": "<|image_1|>\nRepresent the given image with the following question: What material are the objects in this image made of?\n",
+    "Find me an everyday image showing some object or surface made of paper.": "<|image_1|>\nRepresent the given image with the following question: What material are the objects in this image made of?\n",
+    "Find me an everyday image showing some object or surface made of brick.": "<|image_1|>\nRepresent the given image with the following question: What material are the objects in this image made of?\n"
+}

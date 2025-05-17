@@ -1,0 +1,14 @@
+{
+    "Find me an everyday image that is taken in a sunny day.\n": "<|image_1|>\nRepresent the given image with the following question: What is the weather like in this image?\n",
+    "Find me an everyday image that is taken in a cloudy day.\n": "<|image_1|>\nRepresent the given image with the following question: What is the weather like in this image?\n",
+    "Find me an everyday image that is taken in a rainy day.\n": "<|image_1|>\nRepresent the given image with the following question: What is the weather like in this image?\n",
+    "Find me an everyday image that is taken in a misty day.\n": "<|image_1|>\nRepresent the given image with the following question: What is the weather like in this image?\n",
+    "Find me an everyday image that is taken in a clear day.\n": "<|image_1|>\nRepresent the given image with the following question: What is the weather like in this image?\n",
+    "Find me an everyday image that is taken in a snowy day.\n": "<|image_1|>\nRepresent the given image with the following question: What is the weather like in this image?\n",
+    "Find me an everyday image that is taken in a stormy day.\n": "<|image_1|>\nRepresent the given image with the following question: What is the weather like in this image?\n",
+    "Find me an everyday image that is taken in a cold day.\n": "<|image_1|>\nRepresent the given image with the following question: What is the weather like in this image?\n",
+    "Find me an everyday image that is taken in a overcast day.\n": "<|image_1|>\nRepresent the given image with the following question: What is the weather like in this image?\n",
+    "Find me an everyday image that is taken in a drizzly day.\n": "<|image_1|>\nRepresent the given image with the following question: What is the weather like in this image?\n",
+    "Find me an everyday image that is taken in a chilly day.\n": "<|image_1|>\nRepresent the given image with the following question: What is the weather like in this image?\n",
+    "Find me an everyday image that is taken in a warm day.\n": "<|image_1|>\nRepresent the given image with the following question: What is the weather like in this image?\n"
+}

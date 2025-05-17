@@ -1,0 +1,14 @@
+{
+    "Find me an everyday image with 0 people in the picture.": "<|image_1|>\nRepresent the given image with the following question: How many people are present in this image?\n",
+    "Find me an everyday image showing one person in the picture.": "<|image_1|>\nRepresent the given image with the following question: How many people are present in this image?\n",
+    "Find me an everyday image with 4 people in the picture.": "<|image_1|>\nRepresent the given image with the following question: How many people are present in this image?\n",
+    "Find me an everyday image with 2 people in the picture.": "<|image_1|>\nRepresent the given image with the following question: How many people are present in this image?\n",
+    "Find me an everyday image with 6 people in the picture.": "<|image_1|>\nRepresent the given image with the following question: How many people are present in this image?\n",
+    "Find me an everyday image with 5 people in the picture.": "<|image_1|>\nRepresent the given image with the following question: How many people are present in this image?\n",
+    "Find me an everyday image with 3 people in the picture.": "<|image_1|>\nRepresent the given image with the following question: How many people are present in this image?\n",
+    "Find me an everyday image with over 10 people in the picture.": "<|image_1|>\nRepresent the given image with the following question: How many people are present in this image?\n",
+    "Find me an everyday image with 10 people in the picture.": "<|image_1|>\nRepresent the given image with the following question: How many people are present in this image?\n",
+    "Find me an everyday image with 8 people in the picture.": "<|image_1|>\nRepresent the given image with the following question: How many people are present in this image?\n",
+    "Find me an everyday image with 7 people in the picture.": "<|image_1|>\nRepresent the given image with the following question: How many people are present in this image?\n",
+    "Find me an everyday image with 9 people in the picture.": "<|image_1|>\nRepresent the given image with the following question: How many people are present in this image?\n"
+}

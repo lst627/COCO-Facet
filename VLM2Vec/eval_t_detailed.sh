@@ -30,17 +30,17 @@ DATASET_PATH="/your-path"
 #   --image_dir $DATASET_PATH/visual7w/images/
 
 
-python eval_t_detailed.py --model_name llava-hf/llava-1.5-7b-hf \
-  --model_backbone llava-hf/llava-1.5-7b-hf \
-  --encode_output_path output/outputs_t_detailed/ \
-  --num_crops 4 --max_len 256 \
-  --pooling last --normalize True \
-  --dataset_name TIGER-Lab/MMEB-eval \
-  --subset_name Visual7W_scene_retrieval \
-  --embedding_type unimodal \
-  --image_resolution low \
-  --dataset_split test --per_device_eval_batch_size 32 \
-  --image_dir $DATASET_PATH/visual7w/images/
+# python eval_t_detailed.py --model_name llava-hf/llava-1.5-7b-hf \
+#   --model_backbone llava-hf/llava-1.5-7b-hf \
+#   --encode_output_path output/outputs_t_detailed/ \
+#   --num_crops 4 --max_len 256 \
+#   --pooling last --normalize True \
+#   --dataset_name TIGER-Lab/MMEB-eval \
+#   --subset_name Visual7W_scene_retrieval \
+#   --embedding_type unimodal \
+#   --image_resolution low \
+#   --dataset_split test --per_device_eval_batch_size 32 \
+#   --image_dir $DATASET_PATH/visual7w/images/
 
 # python eval_t_detailed.py --model_name llava-hf/llava-1.5-7b-hf \
 #   --model_backbone llava-hf/llava-1.5-7b-hf \
