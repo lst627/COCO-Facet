@@ -1,6 +1,6 @@
 from itertools import repeat
 from torch.jit import isinstance
-
+from PIL import Image
 import logging
 from dataclasses import dataclass
 from transformers import ProcessorMixin, AutoProcessor, AutoTokenizer
@@ -538,6 +538,30 @@ class SigLIPCollator(CLIPCollator):
     def _process_text(self, text):
         return self.txt_processors(text, padding="max_length", max_length=self.data_args.max_len, truncation=True, return_tensors="pt")
 
+@dataclass
+class BLIP2Collator:
+    data_args: DataArguments
+    vis_processors: AutoProcessor
+    txt_processors: AutoTokenizer
+
+    def __call__(self, examples):
+        """
+        :param examples: qry, qry_image, pos_text, pos_image
+        """
+        inputs = self._get_batch_inputs(examples)
+        return inputs
+    
+    def _get_batch_inputs(self, examples):
+        if examples[0][1] == None: # No images, only queries
+            inputs = [{"text_input": [self.txt_processors(example[0])], "image": None} for example in examples]
+        else: # only images
+            inputs = []
+            for example in examples:
+                image = example[1]
+                if image.mode == 'L':
+                    image = image.convert('RGB')
+                inputs.append({"text_input": None, "image": self.vis_processors(image).unsqueeze(0)})
+        return inputs
 
 @dataclass
 class OpenCLIPCollator:

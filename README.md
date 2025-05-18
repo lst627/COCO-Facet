@@ -51,6 +51,8 @@ sh eval_a.sh
 ```
 Note that we need the embeddings given by "eval_f.sh" and "eval_d.sh" to derive the matrix W.
 
+We include the collators for other MLLM-based universal multimodal embedders in VLM2Vec/src/collator.py.
+
 ## Dataset Construction
 
 We attach the dataset construction process in the .ipynb files in the "construction" folder.
