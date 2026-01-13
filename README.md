@@ -60,3 +60,17 @@ We attach the dataset construction process in the .ipynb files in the "construct
 ## Acknowledgment
 
 This code is mainly based on the [VLM2Vec repository](https://github.com/TIGER-AI-Lab/VLM2Vec).
+
+
+## Citation
+
+If you find our code, data, or the paper useful, please cite the paper:
+
+```
+@article{li2025highlighting,
+  title={Highlighting What Matters: Promptable Embeddings for Attribute-Focused Image Retrieval},
+  author={Li, Siting and Gao, Xiang and Du, Simon Shaolei},
+  journal={arXiv preprint arXiv:2505.15877},
+  year={2025}
+}
+```
