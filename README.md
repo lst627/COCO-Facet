@@ -69,10 +69,15 @@ This code is mainly based on the [VLM2Vec repository](https://github.com/TIGER-A
 If you find our code, data, or the paper useful, please cite the paper:
 
 ```
-@article{li2025highlighting,
-  title={Highlighting What Matters: Promptable Embeddings for Attribute-Focused Image Retrieval},
-  author={Li, Siting and Gao, Xiang and Du, Simon Shaolei},
-  journal={arXiv preprint arXiv:2505.15877},
-  year={2025}
+@inproceedings{NEURIPS2025_a6e3dac8,
+ author = {Li, Siting and Gao, Xiang and Du, Simon},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {D. Belgrave and C. Zhang and H. Lin and R. Pascanu and P. Koniusz and M. Ghassemi and N. Chen},
+ pages = {115077--115110},
+ publisher = {Curran Associates, Inc.},
+ title = {Highlighting What Matters: Promptable Embeddings for Attribute-Focused Image Retrieval},
+ url = {https://proceedings.neurips.cc/paper_files/paper/2025/file/a6e3dac86d06ce2a815a946ef008c1de-Paper-Conference.pdf},
+ volume = {38},
+ year = {2025}
 }
 ```
