@@ -6,7 +6,7 @@ This repository contains code for the COCO-Facet benchmark for attribute-focused
 
 ## Downloading the Images
 
-The annotations are from MSCOCO 2017, COCO-Stuff, Visual7W, and VisDial about COCO images. Since they reindexed the images, we recommend downloading the images at [MSCOCO_val2017](http://images.cocodataset.org/zips/val2017.zip), [VisDial_val2018](https://www.dropbox.com/s/twmtutniktom7tu/VisualDialog_val2018.zip), [Visual7W](http://vision.stanford.edu/yukezhu/).
+The annotations are from MSCOCO 2017, COCO-Stuff, Visual7W, and VisDial about COCO images. Since they reindexed the images, we recommend downloading the images at [MSCOCO_val2017](http://images.cocodataset.org/zips/val2017.zip), [VisDial_val2018](https://www.dropbox.com/s/twmtutniktom7tu/VisualDialog_val2018.zip), [Visual7W](http://vision.stanford.edu/yukezhu/), or jointly from [Hugging Face](https://huggingface.co/datasets/lst627/COCO-Facet)
 
 ## Environment
 
