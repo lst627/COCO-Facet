@@ -1,6 +1,8 @@
 # COCO-Facet
 
-This repository contains code for the COCO-Facet benchmark for attribute-focused text-to-image retrieval ("Facets" of the images). The benchmark can be downloaded [here](https://www.dropbox.com/scl/fo/hbkknl14pj5wwgpphbt6l/AC15YovOLv65Ek3hE4kib1o?rlkey=fhphyfml0uc6ctnb70v95id1n&st=qrhpzs3o&dl=0). Please place the downloaded json files in the "benchmark" folder for evaluation.
+[![arXiv](https://img.shields.io/badge/arXiv-2505.15877-b31b1b.svg)](https://arxiv.org/abs/2505.15877) [![Hugging Face Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Dataset-yellow)](https://huggingface.co/datasets/lst627/COCO-Facet)
+
+This repository contains code for the COCO-Facet benchmark for attribute-focused text-to-image retrieval ("Facets" of the images). The benchmark can be downloaded from [Hugging Face](https://huggingface.co/datasets/lst627/COCO-Facet) or [Dropbox](https://www.dropbox.com/scl/fo/hbkknl14pj5wwgpphbt6l/AC15YovOLv65Ek3hE4kib1o?rlkey=fhphyfml0uc6ctnb70v95id1n&st=qrhpzs3o&dl=0). Please place the downloaded json files in the "benchmark" folder for evaluation.
 
 ## Downloading the Images
 
